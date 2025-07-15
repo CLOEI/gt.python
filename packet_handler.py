@@ -1,5 +1,6 @@
 from enums import NetGamePacket, NetMessage
 from ffi import TankPacket, enet_peer_disconnect
+from parser.world_parser import parse_map_data
 from utils import read_u32
 import ctypes
 
@@ -72,11 +73,9 @@ class PacketHandler:
             tank_data_ptr = ctypes.cast(data_start, ctypes.POINTER(TankPacket))
             tank_data = tank_data_ptr.contents
             tank_type = NetGamePacket(tank_data.type)
+            extended_data = ctypes.string_at(data_start + ctypes.sizeof(TankPacket), tank_data.extended_data_length)
 
             if tank_type == NetGamePacket.CallFunction:
-                tank_packet_size = ctypes.sizeof(TankPacket)
-                extended_data_start = data_start + tank_packet_size
-                extended_data = ctypes.string_at(extended_data_start, tank_data.extended_data_length)
                 VariantHandler.handle(player, extended_data)
             
             if tank_type == NetGamePacket.PingRequest:
@@ -89,3 +88,13 @@ class PacketHandler:
                 tank_packet.vector_y2 = 250.0
                 tank_packet.value = tank_data.value + 5000
                 player.send_packet_raw(tank_packet)
+
+            if tank_type == NetGamePacket.SendMapData:
+                print("Received SendMapData, saving to cache.")
+                player.world_name = parse_map_data(extended_data)
+                if player.world_name is None:
+                    print("Something went wrong while parsing map data.")
+                else:
+                    print(f"Map data parsed successfully: {player.world_name}")
+                
+

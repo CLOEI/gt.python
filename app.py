@@ -75,6 +75,7 @@ class Player:
         if login_method is LoginMethod.LEGACY and (username is None or password is None):
             raise ValueError("Username and password must be provided for legacy login method.")
         
+        self.world_name = None
         self.address = None
         self.port = None
         self.redirected = False
@@ -162,5 +163,5 @@ class Player:
 
 
 if __name__ == "__main__":
-    player = Player(username="", password="")
+    player = Player(username="Devkunn", password="@Cendy123")
     player.connect()

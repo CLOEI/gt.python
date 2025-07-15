@@ -5,3 +5,4 @@ enet/enet.so
 enet/enet.dylib
 __pycache__/
 venv/
+cache/*.json
