@@ -163,5 +163,5 @@ class Player:
 
 
 if __name__ == "__main__":
-    player = Player(username="Devkunn", password="@Cendy123")
+    player = Player(username="", password="")
     player.connect()

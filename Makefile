@@ -25,7 +25,7 @@ requirements:
 
 parse-items:
 	@echo "Parsing items..."
-	python3 parser/items_parser.py
+	python parser/items_parser.py
 
 $(LIB_NAME): enet/enet.cpp
 	@echo "Compiling enet for $(UNAME_S)..."
