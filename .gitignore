@@ -6,3 +6,4 @@ enet/enet.dylib
 __pycache__/
 venv/
 cache/*.json
+.env

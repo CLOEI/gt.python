@@ -163,5 +163,15 @@ class Player:
 
 
 if __name__ == "__main__":
-    player = Player(username="", password="")
+    from dotenv import load_dotenv
+    import os
+    load_dotenv()
+
+    username = os.getenv("USERNAME")
+    password = os.getenv("PASSWORD")
+
+    if not username or not password:
+        raise ValueError("Username and password must be set in the environment variables.")
+
+    player = Player(username=username, password=password)
     player.connect()
