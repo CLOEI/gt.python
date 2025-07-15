@@ -1,10 +1,19 @@
 import ctypes
+import platform
 from enum import IntEnum
 
+system = platform.system()
+if system == "Windows":
+    lib_name = './enet/enet.dll'
+elif system == "Darwin":
+    lib_name = './enet/enet.dylib'
+else:
+    lib_name = './enet/enet.so'
+
 try:
-    enet = ctypes.CDLL('./enet/enet.dll')
+    enet = ctypes.CDLL(lib_name)
 except OSError:
-    print("Failed to load enet.dll. Ensure it is compiled and located in the 'enet' directory.")
+    print(f"Failed to load {lib_name}. Ensure it is compiled and located in the 'enet' directory.")
     exit(1)
 
 class TankPacket(ctypes.Structure):

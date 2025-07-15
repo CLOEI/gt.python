@@ -1,6 +1,6 @@
 # gt.python
 
-It's a cli multibot. you can create the frontend if you like to. easily via websocket soon.
+It's a cli multibot and it's cross platform. you can create the frontend if you like to. easily via websocket soon.
 
 ## Development
 Requirements:

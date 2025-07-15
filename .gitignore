@@ -1,4 +1,7 @@
 enet/enet.exp
 enet/enet.lib
 enet/enet.dll
+enet/enet.so
+enet/enet.dylib
 __pycache__/
+venv/
